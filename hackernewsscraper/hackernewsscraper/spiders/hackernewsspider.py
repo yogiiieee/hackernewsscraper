@@ -12,8 +12,8 @@ class HackernewsspiderSpider(scrapy.Spider):
         title_url_selector = response.css('span.titleline')
         subdata_selector = response.css('td.subtext')
 
-        print(len(title_url_selector))
-        print(len(subdata_selector))
+        # print(len(title_url_selector))
+        # print(len(subdata_selector))
 
         for i in range(len(title_url_selector)):
             
@@ -32,7 +32,7 @@ class HackernewsspiderSpider(scrapy.Spider):
             yield item_loader.load_item()
 
             next_page_url = response.css('a.morelink::attr(href)').get()
-            print(next_page_url)
+            # print(next_page_url)
             if next_page_url is not None:
                 next_page_url = 'https://news.ycombinator.com/' + next_page_url
                 yield response.follow(next_page_url, callback=self.parse)
